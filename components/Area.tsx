@@ -8,10 +8,10 @@ const Area = ({
 	className = "",
 }: {
 	title: string;
-	children: any;
+	children: ReactNode;
 	action?: boolean;
 	ActionElement?: ReactNode;
-	className: any;
+	className: string;
 }) => (
 	<div className={` flex flex-col overflow-hidden h-full ${className}`}>
 		<div>

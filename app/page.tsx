@@ -1,52 +1,43 @@
 "use client";
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import React, {
-	useState,
-	useMemo,
-	useCallback,
-	useOptimistic,
-	useRef,
-	startTransition,
-	useEffect,
-} from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import { OptionsBox } from "@/components/Option";
 import { IFormatOption } from "@/lib/data";
 import Area from "@/components/Area";
 import SortableFormat from "@/components/Format";
-import { CopyIcon } from "lucide-react";
 import { CopyIconCustom } from "@/components/Icons";
-
+import { v4 } from "uuid";
 // --- CONSTANTS: GIT FORMAT SPECIFIERS AND SAMPLE DATA ---
 
-const SAMPLE_COMMIT_DATA = {
-	"%H": "d8a2b7c4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2",
-	"%h": "d8a2b7c",
-	"%T": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2",
-	"%t": "a1b2c3d",
-	"%P": "b1c2d3e4f5a6b1c2d3e4f5a6b1c2d3e4f5a6b1c2",
-	"%p": "b1c2d3e",
-	"%an": "Jane Doe",
-	"%ae": "jane.doe@example.com",
-	"%ad": "Mon May 27 14:30:00 2024 -0400",
-	"%ar": "2 weeks ago",
-	"%cn": "John Smith",
-	"%ce": "john.smith@example.com",
-	"%cd": "Mon May 27 14:35:00 2024 -0400",
-	"%cr": "2 weeks ago",
-	"%s": "feat: Implement drag-and-drop functionality",
-	"%f": "feat-Implement-drag-and-drop-functionality",
-	"%b": "Adds the ability for users to reorder items in the list.\nImplements HTML5 drag and drop API for a smooth user experience.",
-	"%n": "\n",
-	"%d": " (HEAD -> main, origin/main, tag: v1.0.0)",
-	"%D": "HEAD -> main, tag: v1.0.0, origin/main",
-};
+// const SAMPLE_COMMIT_DATA = {
+// 	"%H": "d8a2b7c4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2",
+// 	"%h": "d8a2b7c",
+// 	"%T": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2",
+// 	"%t": "a1b2c3d",
+// 	"%P": "b1c2d3e4f5a6b1c2d3e4f5a6b1c2d3e4f5a6b1c2",
+// 	"%p": "b1c2d3e",
+// 	"%an": "Jane Doe",
+// 	"%ae": "jane.doe@example.com",
+// 	"%ad": "Mon May 27 14:30:00 2024 -0400",
+// 	"%ar": "2 weeks ago",
+// 	"%cn": "John Smith",
+// 	"%ce": "john.smith@example.com",
+// 	"%cd": "Mon May 27 14:35:00 2024 -0400",
+// 	"%cr": "2 weeks ago",
+// 	"%s": "feat: Implement drag-and-drop functionality",
+// 	"%f": "feat-Implement-drag-and-drop-functionality",
+// 	"%b": "Adds the ability for users to reorder items in the list.\nImplements HTML5 drag and drop API for a smooth user experience.",
+// 	"%n": "\n",
+// 	"%d": " (HEAD -> main, origin/main, tag: v1.0.0)",
+// 	"%D": "HEAD -> main, tag: v1.0.0, origin/main",
+// };
 
 export default function GitLogFormatterPage() {
 	const [selectedOptions, setSelectedOptions] = useState<IFormatOption[]>([]);
 
 	const handleAddOption = useCallback((option: IFormatOption) => {
-		setSelectedOptions((prev) => [...prev, { ...option, id: Date.now(), color: "black" }]);
+		setSelectedOptions((prev) => [...prev, { ...option, id: v4(), color: "black" }]);
 	}, []);
 
 	const handleRemoveOption = useCallback((id: string) => {

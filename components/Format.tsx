@@ -2,7 +2,6 @@ import { GIT_COLORS, IFormatOption } from "@/lib/data";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import {
-	closestCenter,
 	DndContext,
 	DragCancelEvent,
 	DragEndEvent,
@@ -30,8 +29,7 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { DragIcon, RemoveIcon } from "./Icons";
-import { useCallback, useState, forwardRef, useMemo } from "react";
-import clsx from "clsx";
+import { useCallback, useState, useMemo } from "react";
 import { restrictToVerticalAxis, restrictToWindowEdges } from "@dnd-kit/modifiers";
 
 export const GIT_COLOR_MAP = Object.fromEntries(GIT_COLORS.map((c) => [c.value, c.tailwindColor]));
@@ -126,7 +124,7 @@ export function SimpleSortableItem({
 						remove?.(option.id);
 					}}
 					variant={"destructive"}
-					className="cursor-pointer  hover:text-gray-700"
+					className="cursor-pointer text-gray-600  hover:text-gray-700"
 				>
 					<RemoveIcon />
 				</Button>
@@ -190,6 +188,7 @@ const SortableFormat = ({
 			modifiers={[restrictToVerticalAxis, restrictToWindowEdges]}
 			onDragEnd={handleDragEnd}
 			onDragStart={handleDragStart}
+			onDragCancel={handleDragCancel}
 		>
 			{selectedOptions.length > 0 ? (
 				<div>
