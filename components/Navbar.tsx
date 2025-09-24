@@ -13,7 +13,7 @@ type Props = {
 export default function InsetTopNavbar({
 	title = "Git Log Formatter",
 	titleHref = "/",
-	githubUrl = "https://www.github.com",
+	githubUrl = "https://github.com/OmLachake/git-log-formatter",
 	stickyOnScroll = false,
 }: Props) {
 	return (
