@@ -80,7 +80,7 @@ export default function GitLogFormatterPage() {
 				<ResizablePanelGroup direction="horizontal" className="h-full">
 					<ResizablePanel>
 						<ResizablePanelGroup direction="vertical">
-							<ResizablePanel className="min-h-[200px]" defaultSize={50}>
+							<ResizablePanel minSize={25} className="min-h-[200px]" defaultSize={50}>
 								<Area title="1. Select Format Specifiers" className={""}>
 									<ScrollArea>
 										<OptionsBox
@@ -92,7 +92,7 @@ export default function GitLogFormatterPage() {
 								</Area>
 							</ResizablePanel>
 							<ResizableHandle data-orientation="vertical" />
-							<ResizablePanel className="min-h-[200px]">
+							<ResizablePanel minSize={25} className="min-h-[200px]">
 								<Area title="3. Generated Command" className={""}>
 									<div className="bg-black rounded-md p-4 h-full flex flex-col relative">
 										<code className="text-green-400 whitespace-pre-wrap break-all font-mono flex-grow">
@@ -120,7 +120,7 @@ export default function GitLogFormatterPage() {
 
 					<ResizablePanel>
 						<ResizablePanelGroup direction="vertical">
-							<ResizablePanel className="">
+							<ResizablePanel minSize={25} className="">
 								<Area title="2. Order & Customize Format" className={""}>
 									<SortableFormat
 										selectedOptions={selectedOptions}
