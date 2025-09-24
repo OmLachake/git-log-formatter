@@ -57,6 +57,9 @@ export const metadata: Metadata = {
 	alternates: {
 		canonical: "gitlogformatter.netlify.app",
 	},
+	verification: {
+		google: "IcaUmsJRN405O6p3m3-leIvYIwvwDYs0xzcHxEp2fxM",
+	},
 };
 
 export default function RootLayout({
